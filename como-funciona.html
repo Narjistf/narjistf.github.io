@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cómo llega narjis.es a tu pantalla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fondo: #f3f7f2;
+      --texto: #1f3a2b;
+      --suave: #4c6b57;
+      --tallo: #4c7a4f;
+      --petalo: #ffffff;
+      --corona: #f4b400;
+      --naranja: #d9741c;
+      --borde: #d5e2d6;
+      --codigo: #e6eee6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fondo: #14201a;
+        --texto: #e6efe8;
+        --suave: #a9c0b0;
+        --tallo: #7fb184;
+        --petalo: #1d2d24;
+        --corona: #f4b400;
+        --naranja: #f09a4a;
+        --borde: #2f463a;
+        --codigo: #1d2d24;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: "Atkinson Hyperlegible", Verdana, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+    }
+    main { max-width: 44rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+    h1, h2 { font-family: "Young Serif", Georgia, serif; font-weight: 400; line-height: 1.15; }
+    h1 { font-size: clamp(2.2rem, 7vw, 3.4rem); margin: 1.5rem 0 1rem; }
+    h2 { font-size: 1.7rem; margin: 3rem 0 0.75rem; }
+    p { margin: 0 0 1rem; max-width: 38rem; }
+    .lead { font-size: 1.25rem; color: var(--suave); }
+    a { color: var(--tallo); font-weight: 700; }
+    a:focus-visible { outline: 3px solid var(--corona); outline-offset: 3px; }
+    code {
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 0.9em;
+      background: var(--codigo);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+    }
+    pre {
+      background: var(--codigo);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+    pre code { background: none; padding: 0; }
+    .mapa { overflow-x: auto; margin: 1.5rem 0; }
+    .mapa svg { display: block; min-width: 640px; width: 100%; height: auto; }
+
+    /* El viaje: una lista numerada con una línea como tallo */
+    ol.viaje { list-style: none; counter-reset: paso; padding: 0; margin: 1.5rem 0; }
+    ol.viaje li {
+      counter-increment: paso;
+      position: relative;
+      padding: 0 0 1.75rem 3.25rem;
+      border-left: 3px solid var(--tallo);
+      margin-left: 1rem;
+    }
+    ol.viaje li:last-child { border-left-color: transparent; padding-bottom: 0; }
+    ol.viaje li::before {
+      content: counter(paso);
+      position: absolute;
+      left: -1.1rem;
+      top: -0.2rem;
+      width: 2rem; height: 2rem;
+      border-radius: 50%;
+      background: var(--corona);
+      color: #1f3a2b;
+      font-weight: 700;
+      display: grid; place-items: center;
+    }
+    ol.viaje h3 { margin: 0 0 0.3rem; font-size: 1.1rem; }
+    .quien { color: var(--naranja); font-weight: 700; }
+    .tabla { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+    th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--borde); vertical-align: top; }
+    th { color: var(--suave); }
+    .volver { display: inline-block; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="index.html">Volver al inicio</a>
+
+    <h1>Cómo llega narjis.es a tu pantalla</h1>
+    <p class="lead">Escribes nueve letras y en menos de un segundo ves una página que está guardada en un ordenador de GitHub, al otro lado del mundo. Por el camino intervienen cinco sistemas distintos.</p>
+
+    <div class="mapa" role="img" aria-label="Esquema: el navegador pregunta al resolvedor DNS, que consulta a los servidores raíz, al registro .es y a Cloudflare; con la dirección IP, el navegador pide la página a GitHub Pages.">
+      <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" font-family="Atkinson Hyperlegible, Verdana, sans-serif" font-size="13">
+        <defs>
+          <marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--tallo)"/>
+          </marker>
+        </defs>
+        <!-- fase 1: preguntar la dirección -->
+        <text x="20" y="22" fill="var(--suave)" font-weight="700">1. Averiguar la dirección (DNS)</text>
+        <g fill="var(--petalo)" stroke="var(--borde)" stroke-width="1.5">
+          <rect x="20" y="110" width="120" height="56" rx="10"/>
+          <rect x="200" y="110" width="130" height="56" rx="10"/>
+          <rect x="400" y="40" width="130" height="50" rx="10"/>
+          <rect x="400" y="115" width="130" height="50" rx="10"/>
+          <rect x="400" y="190" width="130" height="50" rx="10"/>
+        </g>
+        <rect x="580" y="110" width="120" height="56" rx="10" fill="var(--corona)"/>
+        <g fill="var(--texto)" text-anchor="middle">
+          <text x="80" y="135" font-weight="700">Tu navegador</text>
+          <text x="80" y="153" fill="var(--suave)">narjis.es?</text>
+          <text x="265" y="135" font-weight="700">Resolvedor DNS</text>
+          <text x="265" y="153" fill="var(--suave)">de tu operador</text>
+          <text x="465" y="62" font-weight="700">Servidores raíz</text>
+          <text x="465" y="79" fill="var(--suave)">«pregunta a .es»</text>
+          <text x="465" y="137" font-weight="700">Registro .es</text>
+          <text x="465" y="154" fill="var(--suave)">«pregunta a Cloudflare»</text>
+          <text x="465" y="212" font-weight="700">Cloudflare</text>
+          <text x="465" y="229" fill="var(--suave)">«185.199.108.153»</text>
+          <text x="640" y="135" font-weight="700" fill="#1f3a2b">GitHub Pages</text>
+          <text x="640" y="153" fill="#1f3a2b">narjistf.github.io</text>
+        </g>
+        <g stroke="var(--tallo)" stroke-width="2" fill="none">
+          <path d="M140 138 H198" marker-end="url(#f)"/>
+          <path d="M330 128 L398 70" marker-end="url(#f)"/>
+          <path d="M330 138 H398" marker-end="url(#f)"/>
+          <path d="M330 148 L398 210" marker-end="url(#f)"/>
+        </g>
+        <!-- fase 2: pedir la página -->
+        <path d="M80 166 V275 H640 V168" stroke="var(--naranja)" stroke-width="2.5" fill="none" marker-end="url(#f)"/>
+        <text x="360" y="268" text-anchor="middle" fill="var(--naranja)" font-weight="700">2. Pedir la página por HTTPS a esa dirección</text>
+      </svg>
+    </div>
+
+    <h2>El viaje, paso a paso</h2>
+    <ol class="viaje">
+      <li>
+        <h3>Escribes narjis.es</h3>
+        <p><span class="quien">Tu navegador</span> no sabe dónde está «narjis.es». Internet no funciona con nombres sino con números: las direcciones IP, como <code>185.199.108.153</code>. Necesita traducir el nombre a un número.</p>
+      </li>
+      <li>
+        <h3>Pregunta a la guía telefónica de internet</h3>
+        <p>Esa traducción la hace el <strong>DNS</strong> (sistema de nombres de dominio). Tu navegador pregunta a un <span class="quien">resolvedor DNS</span>, normalmente el de tu compañía de internet. Si alguien ha preguntado por narjis.es hace poco, ya tiene la respuesta guardada y salta al paso 6.</p>
+      </li>
+      <li>
+        <h3>Los servidores raíz</h3>
+        <p>Si no la sabe, el resolvedor empieza por arriba: los <span class="quien">servidores raíz</span>. No conocen narjis.es, pero saben quién lleva todos los dominios que terminan en <code>.es</code>.</p>
+      </li>
+      <li>
+        <h3>El registro de .es</h3>
+        <p>Los dominios <code>.es</code> los gestiona Red.es. Cuando se compró narjis.es, se le dijo al registro que sus <strong>nameservers</strong> (los servidores que guardan la información del dominio) son los de <span class="quien">Cloudflare</span>. Así que responde: «pregunta a Cloudflare».</p>
+      </li>
+      <li>
+        <h3>Cloudflare da la dirección</h3>
+        <p>En Cloudflare hay unos <strong>registros DNS</strong>, como fichas de una agenda. Los registros de tipo <code>A</code> dicen «narjis.es está en 185.199.108.153» (y en otras tres direcciones de reserva). Esas direcciones son de GitHub.</p>
+      </li>
+      <li>
+        <h3>Conexión segura con GitHub</h3>
+        <p>Con la dirección, tu navegador llama a <span class="quien">GitHub Pages</span> por <strong>HTTPS</strong>. Primero comprueban un <strong>certificado</strong> que demuestra que ese servidor puede hablar en nombre de narjis.es; es el candado de la barra de direcciones. Todo lo que viaja después va cifrado.</p>
+      </li>
+      <li>
+        <h3>GitHub busca la web correcta</h3>
+        <p>Los mismos servidores de GitHub alojan millones de webs. El navegador dice «quiero narjis.es» y GitHub busca qué repositorio tiene un archivo <code>CNAME</code> con ese nombre: <code>narjistf.github.io</code>. De ahí envía <code>index.html</code>.</p>
+      </li>
+      <li>
+        <h3>Tu navegador dibuja la página</h3>
+        <p>El archivo llega como texto. El navegador lee las etiquetas HTML (<code>&lt;h1&gt;</code> es un título, <code>&lt;p&gt;</code> un párrafo), aplica el estilo CSS (colores y letras), descarga las fuentes y la pinta en la pantalla.</p>
+      </li>
+    </ol>
+
+    <h2>Y cuando cambio algo, ¿cómo llega?</h2>
+    <p>Cuando editas un archivo en GitHub y pulsas <em>Commit changes</em>, <strong>Git</strong> guarda una foto nueva de todos tus archivos con un mensaje que explica el cambio. Esa foto se llama <strong>commit</strong> y queda en el historial para siempre: puedes volver a cualquier versión anterior.</p>
+    <p>Cada commit en la rama <code>main</code> despierta a <strong>GitHub Actions</strong>, un robot que copia tus archivos a los servidores de GitHub Pages. Tarda uno o dos minutos; lo puedes ver en la pestaña <em>Actions</em> de tu repositorio. Mientras tanto, la gente sigue viendo la versión anterior.</p>
+
+    <h2>Pruébalo tú</h2>
+    <p>Puedes hacer tú misma la pregunta del paso 2. En Windows abre «Símbolo del sistema»; en Mac, «Terminal». Escribe:</p>
+    <pre><code>nslookup narjis.es</code></pre>
+    <p>La respuesta debería mostrar las direcciones <code>185.199.108.153</code> a <code>185.199.111.153</code>. Si sale otra cosa, los registros de Cloudflare no están bien. Para preguntar directamente a Cloudflare, como en el paso 5:</p>
+    <pre><code>nslookup -type=NS narjis.es</code></pre>
+    <p>Esto muestra los nameservers del dominio, que deben terminar en <code>ns.cloudflare.com</code>.</p>
+
+    <h2>Las palabras, en una tabla</h2>
+    <div class="tabla">
+      <table>
+        <thead><tr><th>Palabra</th><th>Qué es</th><th>En tu caso</th></tr></thead>
+        <tbody>
+          <tr><td>Dominio</td><td>El nombre de una web</td><td>narjis.es</td></tr>
+          <tr><td>Registro</td><td>Quien lleva todos los dominios de una terminación</td><td>Red.es, para .es</td></tr>
+          <tr><td>Nameserver</td><td>Servidor que guarda los datos de un dominio</td><td>Cloudflare</td></tr>
+          <tr><td>Registro A</td><td>Ficha que une un nombre con una dirección IP</td><td>narjis.es → 185.199.108.153</td></tr>
+          <tr><td>Registro CNAME</td><td>Ficha que une un nombre con otro nombre</td><td>www.narjis.es → narjistf.github.io</td></tr>
+          <tr><td>Repositorio</td><td>Carpeta de archivos con su historial</td><td>narjistf.github.io</td></tr>
+          <tr><td>Commit</td><td>Un cambio guardado, con su mensaje</td><td>«Mi primera web»</td></tr>
+          <tr><td>HTTPS</td><td>Conexión cifrada, el candado</td><td>Certificado que pide GitHub</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <a class="volver" href="index.html">Volver al inicio</a>
+  </main>
+</body>
+</html>
